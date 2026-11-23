@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurora EV Plant — Digital Twin</title>
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<header id="top">
+  <div class="brand">
+    <div class="logo"><span></span></div>
+    <div><b>Aurora EV Plant</b><small>Digital twin · live</small></div>
+  </div>
+  <div class="clock"><b id="clock">06:00</b><small id="shift">Shift 1</small></div>
+  <div class="seg" id="speed" title="Simulation speed">
+    <button data-v="0" title="Pause">❚❚</button><button data-v="1">1×</button><button data-v="3">3×</button><button data-v="10">10×</button><button data-v="30" class="on">30×</button><button data-v="60">60×</button><button data-v="150">150×</button><button data-v="400">400×</button>
+  </div>
+  <div class="seg mode" id="mode" title="How much authority the AI controller has">
+    <button data-v="off">Manual</button><button data-v="advisory">Advisory</button><button data-v="auto" class="on">Autonomous</button>
+  </div>
+  <div class="spacer"></div>
+  <label class="sel">View<select id="viewSel"></select></label>
+  <label class="sel">Overlay<select id="overlaySel">
+    <option value="state">Station state</option><option value="health">Equipment health</option><option value="util">Utilisation</option><option value="quality">Defect rate</option><option value="energy">Power draw</option>
+  </select></label>
+  <button class="btn ghost" id="tourBtn" title="Automatic camera tour">▶ Tour</button>
+  <button class="btn ghost" id="labelBtn" title="Show or hide 3D labels">Labels</button>
+  <button class="btn ghost" id="qualBtn" title="Toggle shadows and resolution">HD</button>
+</header>
+
+<section id="kpis"></section>
+
+<aside id="left" class="panel">
+  <button class="collapse" data-side="left" title="Collapse panel">‹</button>
+  <nav class="tabs" data-for="left"><button data-tab="flow" class="on">Value stream</button><button data-tab="supply">Supply chain</button><button data-tab="orders">Orders &amp; delivery</button></nav>
+  <div class="body" id="leftBody"></div>
+</aside>
+
+<aside id="right" class="panel">
+  <button class="collapse" data-side="right" title="Collapse panel">›</button>
+  <nav class="tabs" data-for="right"><button data-tab="brain" class="on">AI controller</button><button data-tab="assets">Equipment</button><button data-tab="predict">Predict</button><button data-tab="scen">Scenarios</button></nav>
+  <div class="body" id="rightBody"></div>
+</aside>
+
+<div id="toasts"></div>
+<div id="inspector" class="panel hidden"></div>
+<div id="legend" class="panel"></div>
+<div id="tooltip"></div>
+<div id="help">Drag to orbit · right-drag to pan · scroll to zoom · click anything to inspect · double-click to fly there</div>
+<div id="loading"><div><div class="logo big"><span></span></div><b>Building the plant…</b><small>Warming up production lines and syncing the twin</small></div></div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
